@@ -1,0 +1,59 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <h5>Update data</h5>
+                <div class="row">
+                    <form>
+
+                        <div class="form-group mb-2">
+                            <label for="exampleInputEmail1">Enter Name</label>
+                            <input type="text" class="form-control" [(ngModel)]="todo.name" name="name"
+                                placeholder="Enter Name">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="exampleInputEmail1">Enter Date</label>
+                            <input type="date" class="form-control" [(ngModel)]="todo.date" name="date"
+                                placeholder="Enter date">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="exampleInputEmail1">Enter Start Time</label>
+                            <input type="time" class="form-control" [(ngModel)]="todo.stime" name="stime"
+                                placeholder="Enter Start Time">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="exampleInputEmail1">Enter End Time</label>
+                            <input type="time" class="form-control" [(ngModel)]="todo.etime" name="etime"
+                                placeholder="Enter End Time">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label for="exampleInputEmail1">Assignee</label>
+                            <input type="text" class="form-control" [(ngModel)]="todo.aname" name="aname"
+                                placeholder="Assignee">
+                        </div>
+
+                        <!--<div>
+                            <label>Category</label>
+                            <select id="country" name="selectCategory" formControlName="selectCategory">
+                              <option selected>select category</option>
+                              <option *ngFor="let item of data" [value]=item.name>{{item.name}}</option>
+                             </select>
+                          </div>-->
+
+
+                    </form>
+                </div>
+                <div>
+                    <button  (click)="tupdate()" class="btn btn-success me-3">Update</button>
+                    <button routerLink="/todo" class="btn btn-dark">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<pre>{{employee|json}}</pre>-->

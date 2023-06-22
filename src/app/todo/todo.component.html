@@ -1,0 +1,108 @@
+<nav class="navbar bg-dark">
+
+
+    <div class="d-flex">
+        <button class="btn  btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Todo</button>
+    </div>
+
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div style="background-color:rgb(99, 105, 86)" class="modal-header">
+                <h5 style="color:white" class="modal-title" id="exampleModalLabel">ADD TODO</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="todoform">
+                    <div class="form-group mb-2">
+                        <label for="exampleInputEmail1">Enter Todo Name </label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="Enter Todo Name">
+                        <span class="text-danger" *ngIf="todoform.controls['name'].dirty && todoform.hasError('required','name')">* Name is required</span>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="exampleInputEmail1">Enter Date </label>
+                        <input type="date" class="form-control" formControlName="date" placeholder="Enter Date">
+                        <span class="text-danger" *ngIf="todoform.controls['date'].dirty && todoform.hasError('required','date')">*Date is required</span>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="exampleInputEmail1">Enter Start Time </label>
+                        <input type="time" class="form-control" formControlName="stime" placeholder="Enter Start Time">
+                        <span class="text-danger" *ngIf="todoform.controls['name'].dirty && todoform.hasError('required','stime')">*Start time is required</span>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="exampleInputEmail1">Enter End time </label>
+                        <input type="time" class="form-control" formControlName="etime" placeholder="Enter Start Time">
+                        <span class="text-danger" *ngIf="todoform.controls['name'].dirty && todoform.hasError('required','etime')">*End time is required</span>
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="exampleInputEmail1">Enter Assignee Name </label>
+                        <input type="text" class="form-control" formControlName="aname"
+                            placeholder="Enter Assignee Name">
+                            <span class="text-danger" *ngIf="todoform.controls['aname'].dirty && todoform.hasError('required','aname')">*Assignee Name is required</span>
+                    </div>
+                    <div>
+                        <label for="exampleInputEmail1">Select Category </label>
+                        <select id="country" name="selectCategory" formControlName="selectCategory" (change)="onChangeEvent($event)" >
+                            <option selected>Select category</option>
+                            <option *ngFor="let item of data" [value]="item.name">{{item.name}}</option>
+                            <span class="text-danger" *ngIf="todoform.controls['selectCategory'].dirty && todoform.hasError('required','selectCategory')">*Select Category is required</span>
+                        </select>
+
+
+                    </div>
+
+                </form>
+            </div>
+
+            <div style="background-color:yellowgreen" class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+                <button (click)="addtodo(this.todoform.value)" [disabled]="this.todoform.invalid" type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid" mt-3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Todo Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Assignee Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of tododata ">
+
+                <td>{{item.name}}</td>
+                <td>{{item.date}}</td>
+                <td>{{item.stime}}</td>
+                <td>{{item.etime}}</td>
+                <td>{{item.aname}}</td>
+                <td>{{item.selectCategory}}</td>
+                <td>
+                    <button routerLink="/tupdate/{{item.id}}" class="btn btn-warning">Edit</button>&nbsp;
+                    <button class="btn btn-danger" (click)="deletetodo(item.id)">Delete</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>

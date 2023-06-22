@@ -1,0 +1,73 @@
+<nav class="navbar bg-dark">
+
+
+  <div class="d-flex">
+    <button class="btn  btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>
+  </div>
+
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div style="background-color:yellowgreen" class="modal-header">
+        <h5 style="color:white" class="modal-title" id="exampleModalLabel">ADD CATEGORY</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form [formGroup]="categoryform">
+          <div class="form-group mb-2">
+            <label for="exampleInputEmail1">Enter ID</label>
+            <input type="number"class="form-control" formControlName="id" placeholder="Enter ID">
+            <span class="text-danger" *ngIf="categoryform.controls['id'].dirty && categoryform.hasError('required','id')">*ID is required</span>
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="exampleInputEmail1">Enter Category Name</label>
+            <input type="name" class="form-control" formControlName="name" placeholder="Enter Category Name">
+            <span class="text-danger" *ngIf="categoryform.controls['name'].dirty && categoryform.hasError('required','name')">*Category Name is required</span>
+          </div>
+        </form>
+      </div>
+
+      <div style="background-color:yellowgreen" class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+        <button (click)="addcategory(this.categoryform.value)" type="button" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid" mt-3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Category Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data ">
+
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>
+          <button routerLink="/update/{{item.id}}" class="btn btn-warning">Edit</button>&nbsp;
+          <button class="btn btn-danger" (click)="deletecategory(item.id)">Delete</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+
+<!--json-server --watch db.json-->
